@@ -7,7 +7,9 @@
     'category': 'Base',
     'version': '17.0.0.1',
     'depends': ['base'],
-    'data': [],
+    'data': [
+        'security/ir.model.access.csv',
+    ],
     'license': 'AGPL-3',
     'application':True,
     'installable': True,

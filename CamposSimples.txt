@@ -1,0 +1,10 @@
+Campos simples
+- Integer
+- Float
+- Char
+- Selection
+- Text
+- Boolean
+- Binary
+- Date
+- Datetime

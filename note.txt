@@ -1,0 +1,40 @@
+myModule/
+│
+├── controllers/ #Contiene los controladores para manejar solicitudes HTTP.
+│   └── __init__.py
+│   └── my_controller.py
+│
+├── data/ #Archivos XML o CSV para cargar datos iniciales.
+│   └── my_data.xml
+│
+├── i18n/ #Archivos de traducción para diferentes idiomas.
+│   └── es.po
+│   └── fr.po
+│
+├── models/ #Definición de los modelos de datos.
+│   └── __init__.py
+│   └── my_model.py
+│
+├── security/ # Reglas de acceso y permisos.
+│   └── ir.model.access.csv
+│   └── security_rules.xml
+│
+├── static/ # Archivos estáticos como imágenes, CSS y JavaScript.
+│   ├── description/
+│   │   └── icon.png
+│   ├── img/
+│   │   └── logo.png
+│   ├── css/
+│   │   └── styles.css
+│   └── js/
+│       └── scripts.js
+│
+├── views/ # Definición de las vistas (XML) para la interfaz de usuario.
+│   └── my_model_views.xml
+│   └── templates.xml
+│
+├── wizard/ #Asistentes (wizards) para acciones específicas.
+│   └── __init__.py
+│   └── my_wizard.py
+│
+└── __manifest__.py #Archivo de manifiesto que define la metadata del módulo.
