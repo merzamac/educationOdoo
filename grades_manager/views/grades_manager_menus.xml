@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="grades_manager_menu" name="Grades Manager"/>
+    <menuitem id="grades_course_menu" parent="grades_manager.grades_manager_menu" name="Course" action="grades_course_action"/>
+    <menuitem id="teacher_menu" parent="grades_manager.grades_manager_menu" name="Teacher"/>
+
+</odoo>
