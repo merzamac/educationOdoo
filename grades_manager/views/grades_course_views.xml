@@ -22,4 +22,16 @@
         </tree>
      </field>
      </record>
+     <record id="grades_course_form_view" model="ir.ui.view">
+        <field name="name">grades.course.form</field>
+        <field name="model">grades.course</field>
+        <field name="arch" type="xml">
+            <form string="Course">
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+     </record>
+
 </odoo>
