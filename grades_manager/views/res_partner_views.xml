@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="teachers_action" model="ir.actions.act_window">
-        <fiel name="name">Teacher</fiel>
-        <fiel name="res_model">res.partner</fiel>
-        <fiel name="view_mode">tree,form</fiel>
 
+     <record id="teachers_tree_view" model="ir.ui.view">
+         <field name="name">teachers.tree</field>
+         <field name="model">res.partner</field>
+         <field name="arch" type="xml">
+            <tree string="Teachers">
+                <field name="complete_name"/>
+                <field name="phone"/>
+                <field name="email"/>
+            </tree>
+         </field>
+    </record>
+    <record id="teachers_form_view" model="ir.ui.view">
+        <field name="name">teachers.form</field>
+        <field name="model">res.partner</field>
+
+        <field name="arch" type="xml">
+            <form string="Teacher">
+                <sheet>
+                    <group col="4">
+                        <group>
+                            <field name="complete_name"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+     </record>
+    <record id="teachers_action" model="ir.actions.act_window">
+        <field name="name" >Teachers</field>
+        <field name="res_model" >res.partner</field>
+        <field name="view_mode" >tree,form</field>
+        <field name="view_ids"
+                    eval="[(5,0,0),
+                    (0,0,{'view_mode':'tree','view_id':ref('teachers_tree_view')}),
+                    (0,0,{'view_mode':'form','view_id':ref('teachers_form_view')})]"/>
     </record>
 </odoo>
