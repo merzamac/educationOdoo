@@ -7,12 +7,12 @@
     </record>
      <record id="grades_course_tree_view" model="ir.ui.view">
      <field name="name">grades.course.tree</field>
-     <field name="res_model">grades.course</field>
+     <field name="model">grades.course</field>
      <field name="arch" type="xml">
         <tree string="Courses">
             <field name="name"/>
             <field name="student_quantity"/>
-            <field name="grades_average"/>
+
             <field name="description"/>
             <field name="is_active"/>
             <field name="course_start"/>
@@ -27,9 +27,24 @@
         <field name="model">grades.course</field>
         <field name="arch" type="xml">
             <form string="Course">
-                <group>
-                    <field name="name"/>
-                </group>
+                <sheet>
+                    <group col="4">
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="course_start"/>
+                             <field name="course_end"/>
+                        </group>
+                        <group>
+                            <field name="course_image"/>
+                            <field name="student_quantity"/>
+                            <field name="is_active"/>
+                            <field name="last_evaluation_date"/>
+                            <field name="course_shift"/>
+                        </group>
+
+                    </group>
+                </sheet>
             </form>
         </field>
      </record>

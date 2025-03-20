@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="teachers_action" model="ir.actions.act_window">
+        <fiel name="name">Teacher</fiel>
+        <fiel name="res_model">res.partner</fiel>
+        <fiel name="view_mode">tree,form</fiel>
+
+    </record>
+</odoo>
