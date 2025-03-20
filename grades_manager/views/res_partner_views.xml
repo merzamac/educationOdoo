@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.ext</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                 <field name="is_teacher"/>
+            </field>
+            <xpath expr="//field[@name='vat']/.." position="inside">
+                <field name="is_freelance"/>
+            </xpath>
+        </field>
+    </record>
      <record id="teachers_tree_view" model="ir.ui.view">
          <field name="name">teachers.tree</field>
          <field name="model">res.partner</field>
@@ -9,13 +21,14 @@
                 <field name="complete_name"/>
                 <field name="phone"/>
                 <field name="email"/>
+                <field name="is_freelance"/>
+                <field name="is_teacher"/>
             </tree>
          </field>
     </record>
     <record id="teachers_form_view" model="ir.ui.view">
         <field name="name">teachers.form</field>
         <field name="model">res.partner</field>
-
         <field name="arch" type="xml">
             <form string="Teacher">
                 <sheet>
@@ -24,6 +37,8 @@
                             <field name="complete_name"/>
                             <field name="phone"/>
                             <field name="email"/>
+                             <field name="is_freelance"/>
+                             <field name="is_teacher"/>
                         </group>
                     </group>
                 </sheet>
@@ -34,6 +49,7 @@
         <field name="name" >Teachers</field>
         <field name="res_model" >res.partner</field>
         <field name="view_mode" >tree,form</field>
+        <field name="domain">[('is_teacher','=',True)]</field>
         <field name="view_ids"
                     eval="[(5,0,0),
                     (0,0,{'view_mode':'tree','view_id':ref('teachers_tree_view')}),

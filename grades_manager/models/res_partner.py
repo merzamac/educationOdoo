@@ -5,3 +5,4 @@ class ResPartner(models.Model):
     #_order = 'email' #oderna la lista por el campo email
 
     is_teacher = fields.Boolean(string='Is Teacher')
+    is_freelance =fields.Boolean(string="Is Freelance")
