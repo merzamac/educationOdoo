@@ -34,9 +34,9 @@
                             <field name="description"/>
                             <field name="course_start"/>
                              <field name="course_end"/>
-                             <field name="teacher_id"/>
+                             <field name="teacher_id" domain="[('is_teacher','=','True')]"/>
                             <field name="evaluation_ids"/>
-                            <field name="student_ids"/>
+                            <field name="student_ids" domain="[('is_student','=','True')]"/>
                         </group>
                         <group>
                             <field name="course_image"/>
