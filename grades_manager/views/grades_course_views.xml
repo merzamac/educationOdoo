@@ -12,13 +12,13 @@
         <tree string="Courses">
             <field name="name"/>
             <field name="student_quantity"/>
-
             <field name="description"/>
             <field name="is_active"/>
             <field name="course_start"/>
             <field name="course_end"/>
             <field name="last_evaluation_date"/>
             <field name="course_shift"/>
+            <field name="teacher_id"/>
         </tree>
      </field>
      </record>
@@ -34,6 +34,9 @@
                             <field name="description"/>
                             <field name="course_start"/>
                              <field name="course_end"/>
+                             <field name="teacher_id"/>
+                            <field name="evaluation_ids"/>
+                            <field name="student_ids"/>
                         </group>
                         <group>
                             <field name="course_image"/>
@@ -43,6 +46,8 @@
                             <field name="course_shift"/>
                         </group>
 
+                    </group>
+                    <group col="4">
                     </group>
                 </sheet>
             </form>

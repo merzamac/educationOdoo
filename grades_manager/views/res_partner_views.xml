@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <field name="category_id" position="after">
                  <field name="is_teacher"/>
+                 <field name="is_student"/>
             </field>
             <xpath expr="//field[@name='vat']/.." position="inside">
                 <field name="is_freelance"/>
@@ -14,7 +15,7 @@
         </field>
     </record>
      <record id="teachers_tree_view" model="ir.ui.view">
-         <field name="name">teachers.tree</field>
+         <field name="name">teachers.tree.view</field>
          <field name="model">res.partner</field>
          <field name="arch" type="xml">
             <tree string="Teachers">
@@ -27,7 +28,7 @@
          </field>
     </record>
     <record id="teachers_form_view" model="ir.ui.view">
-        <field name="name">teachers.form</field>
+        <field name="name">teachers.form.view</field>
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
             <form string="Teacher">
@@ -45,6 +46,39 @@
             </form>
         </field>
      </record>
+    <!-- Students-->
+        <record id="students_form_view" model="ir.ui.view">
+        <field name="name">students.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="Students">
+                <sheet>
+                    <group col="4">
+                        <group>
+                            <field name="complete_name"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            <field name="is_student"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+     </record>
+     <record id="students_tree_view" model="ir.ui.view">
+         <field name="name">students.tree.view</field>
+         <field name="model">res.partner</field>
+         <field name="arch" type="xml">
+            <tree string="Students">
+                <field name="complete_name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="is_student"/>
+            </tree>
+         </field>
+    </record>
+
+
     <record id="teachers_action" model="ir.actions.act_window">
         <field name="name" >Teachers</field>
         <field name="res_model" >res.partner</field>
@@ -54,5 +88,15 @@
                     eval="[(5,0,0),
                     (0,0,{'view_mode':'tree','view_id':ref('teachers_tree_view')}),
                     (0,0,{'view_mode':'form','view_id':ref('teachers_form_view')})]"/>
+    </record>
+        <record id="students_action" model="ir.actions.act_window">
+        <field name="name" >Students</field>
+        <field name="res_model" >res.partner</field>
+        <field name="view_mode" >tree,form</field>
+        <field name="domain">[('is_student','=',True)]</field>
+        <field name="view_ids"
+                    eval="[(5,0,0),
+                    (0,0,{'view_mode':'tree','view_id':ref('students_tree_view')}),
+                    (0,0,{'view_mode':'form','view_id':ref('students_form_view')})]"/>
     </record>
 </odoo>
