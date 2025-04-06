@@ -12,7 +12,13 @@
         'views/grades_course_views.xml',
         'views/res_partner_views.xml',
         'views/grades_evaluation_views.xml',
+        'views/grades_grade_views.xml',
+
+
+
+
         'views/grades_manager_menus.xml',
+
     ],
     'license': 'AGPL-3',
     'application':True,
