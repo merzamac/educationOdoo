@@ -27,28 +27,44 @@
         <field name="model">grades.course</field>
         <field name="arch" type="xml">
             <form string="Course">
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable':1}" />
+                </header>
                 <sheet>
                     <group col="4">
                         <group>
-                            <field name="name"/>
+                            <field name="name" required="1"/>
                             <field name="description"/>
-                            <field name="course_start"/>
-                             <field name="course_end"/>
-                             <field name="teacher_id" domain="[('is_teacher','=','True')]"/>
-                            <field name="evaluation_ids"/>
-                            <field name="student_ids" domain="[('is_student','=','True')]"/>
+                            <field name="course_start" required="1"/>
+                             <field name="course_end" required="1"/>
+                             <field name="teacher_id" domain="[('is_teacher','=','True')]" required="1" readonly="state != 'register'"
+                                    context="{'tree_view_ref':'grades_manager.teachers_tree_view',
+                                             'form_view_ref':'grades_manager.teachers_form_view'}"/>
+                            <field name="teacher_email" string="Teacher email" />
+                           <!-- <field name="evaluation_ids" readonly="state != 'register'" /> -->
+                            <!--<field name="student_ids" domain="[('is_student','=','True')] " readonly="state != 'register'"
+                                   context="{'tree_view_ref':'grades_manager.students_tree_view',
+                                             'form_view_ref':'grades_manager.students_form_view'}"/> -->
                         </group>
                         <group>
                             <field name="course_image"/>
                             <field name="student_quantity"/>
                             <field name="is_active"/>
-                            <field name="last_evaluation_date"/>
+                            <field name="last_evaluation_date" readonly="1"/>
                             <field name="course_shift"/>
+                            <field name="create_uid" invisible="1"/>
                         </group>
-
                     </group>
-                    <group col="4">
-                    </group>
+                    <notebook>
+                        <page string="Evaluations" name="evaluations" >
+                            <field name="evaluation_ids" readonly="state != 'register'" />
+                        </page>
+                        <page string="Students" name="students" >
+                            <field name="student_ids" domain="[('is_student','=','True')] " readonly="state != 'register'"
+                                   context="{'tree_view_ref':'grades_manager.students_tree_view',
+                                             'form_view_ref':'grades_manager.students_form_view'}"/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

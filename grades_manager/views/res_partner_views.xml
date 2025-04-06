@@ -19,9 +19,10 @@
          <field name="model">res.partner</field>
          <field name="arch" type="xml">
             <tree string="Teachers">
-                <field name="complete_name"/>
+                <field name="name"/>
                 <field name="phone"/>
                 <field name="email"/>
+                <field name="vat"/>
                 <field name="is_freelance"/>
                 <field name="is_teacher"/>
             </tree>
@@ -35,9 +36,10 @@
                 <sheet>
                     <group col="4">
                         <group>
-                            <field name="complete_name"/>
+                            <field name="name" required="1"/>
                             <field name="phone"/>
-                            <field name="email"/>
+                            <field name="email" required="1"/>
+                            <field name="vat"/>
                              <field name="is_freelance"/>
                              <field name="is_teacher"/>
                         </group>
@@ -55,10 +57,11 @@
                 <sheet>
                     <group col="4">
                         <group>
-                            <field name="complete_name"/>
+                            <field name="name" required="1"/>
                             <field name="phone"/>
-                            <field name="email"/>
-                            <field name="is_student"/>
+                            <field name="email" required="1"/>
+                            <field name="vat"/>
+                            <field name="is_student" invisible="1"/>
                         </group>
                     </group>
                 </sheet>
@@ -70,9 +73,10 @@
          <field name="model">res.partner</field>
          <field name="arch" type="xml">
             <tree string="Students">
-                <field name="complete_name"/>
+                <field name="name"/>
                 <field name="phone"/>
                 <field name="email"/>
+                <field name="vat"/>
                 <field name="is_student"/>
             </tree>
          </field>
@@ -84,6 +88,7 @@
         <field name="res_model" >res.partner</field>
         <field name="view_mode" >tree,form</field>
         <field name="domain">[('is_teacher','=',True)]</field>
+        <field name="context">{'default_is_teacher':True}</field>
         <field name="view_ids"
                     eval="[(5,0,0),
                     (0,0,{'view_mode':'tree','view_id':ref('teachers_tree_view')}),
@@ -93,7 +98,10 @@
         <field name="name" >Students</field>
         <field name="res_model" >res.partner</field>
         <field name="view_mode" >tree,form</field>
+             <!--filtrar vista-->
         <field name="domain">[('is_student','=',True)]</field>
+            <!--defaul is student-->
+        <field name="context">{'default_is_student':True}</field>
         <field name="view_ids"
                     eval="[(5,0,0),
                     (0,0,{'view_mode':'tree','view_id':ref('students_tree_view')}),
