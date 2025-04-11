@@ -1,5 +1,5 @@
 from tokenize import String
-from odoo import models,fields
+from odoo import models,fields, api
 from odoo.exceptions import ValidationError
 # modelo 1
 # modelo abstracto ()
@@ -37,9 +37,19 @@ class GradesCourse(models.Model):
     #estados
     state = fields.Selection(selection=[('register','Register'),('in_progress','In progress'),('finished','Finished')],string="State", required=True,default='register')
 
+    invalid_date = fields.Boolean(string="Wrong date")
     #funcion write
     def write(self,vals):
         if vals and 'evaluation_ids' in vals and not self.student_ids:
             raise ValidationError('There are not students for this course')
         result = super(GradesCourse, self).write(vals)
         return  result
+
+    #decorador
+    @api.onchange('course_end','course_end')
+    def onchange_dates(self):
+        if self.course_end <= self.course_start or self.course_start >= self.course_end:
+            self.invalid_date = True
+        else:
+            self.invalid_date = False
+

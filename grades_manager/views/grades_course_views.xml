@@ -31,6 +31,8 @@
                     <field name="state" widget="statusbar" options="{'clickable':1}" />
                 </header>
                 <sheet>
+                    <field name="invalid_date" invisible="1"/>
+                    <div class="text-warning mb-3" invisible="not invalid_date">Wrong date</div>
                     <group col="4">
                         <group>
                             <field name="name" required="1"/>
