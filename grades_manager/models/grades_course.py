@@ -1,5 +1,6 @@
 from tokenize import String
 from odoo import models,fields
+from odoo.exceptions import ValidationError
 # modelo 1
 # modelo abstracto ()
 # modelo transitorio (wizard)
@@ -36,3 +37,9 @@ class GradesCourse(models.Model):
     #estados
     state = fields.Selection(selection=[('register','Register'),('in_progress','In progress'),('finished','Finished')],string="State", required=True,default='register')
 
+    #funcion write
+    def write(self,vals):
+        if vals and 'evaluation_ids' in vals and not self.student_ids:
+            raise ValidationError('There are not students for this course')
+        result = super(GradesCourse, self).write(vals)
+        return  result
