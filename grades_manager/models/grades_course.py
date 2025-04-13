@@ -38,6 +38,17 @@ class GradesCourse(models.Model):
     state = fields.Selection(selection=[('register','Register'),('in_progress','In progress'),('finished','Finished')],string="State", required=True,default='register')
 
     invalid_date = fields.Boolean(string="Wrong date")
+    type = fields.Selection([('basic','Basic'),('advanced','Advanced')],string='Type',defaul='Basic')
+    def action_advanced_course_wizard(self):
+        return {
+            "type":"ir.actions.act_window",
+            "name":"Create advanced course",
+            "res_model": "advanced.course.wizard",
+            "view_mode": "form",
+            "target": "new",
+
+        }
+
     #funcion write
     def write(self,vals):
         if vals and 'evaluation_ids' in vals and not self.student_ids:

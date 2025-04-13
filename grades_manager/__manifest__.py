@@ -13,6 +13,8 @@
         'views/res_partner_views.xml',
         'views/grades_evaluation_views.xml',
         'views/grades_grade_views.xml',
+        'wizard/advanced_course_wizard_view.xml',
+        'data/ir_actions.xml',
 
 
 
