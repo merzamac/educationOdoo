@@ -16,13 +16,13 @@ class GradesCourse(models.Model):
         return self.env['res.partner'].search([('is_teacher','=',True),('email','=','mainteacher@main.com')],limit=1).id
     #import fields
     name = fields.Char(string='Name')
-    student_quantity = fields.Integer(string='Student quantity',readonly=True)
+    student_quantity = fields.Integer(string='Student quantity',compute='_compute_student_quantity',store=True)
     grades_average = fields.Float(string='Grades average')
     description = fields.Text(string='Description')
     is_active = fields.Boolean(string='Is active')
     course_start = fields.Date(string='Course start',default=fields.Date.today())
     course_end = fields.Date(string='Course end')
-    last_evaluation_date = fields.Date(string='Last evaluation date')
+    last_evaluation_date = fields.Date(string='Last evaluation date',compute='_compute_last_evaluation_date',store=True)
     course_image = fields.Binary(string='Course image')
     course_shift = fields.Selection([('day','Day'),('night','Night')],string='Course shift')
 
@@ -48,8 +48,18 @@ class GradesCourse(models.Model):
     #decorador
     @api.onchange('course_end','course_end')
     def onchange_dates(self):
-        if self.course_end <= self.course_start or self.course_start >= self.course_end:
+        if (self.course_start and self.course_end and (self.course_end <= self.course_start or self.course_start >= self.course_end)):
             self.invalid_date = True
         else:
             self.invalid_date = False
 
+    @api.depends('evaluation_ids.date')
+    def _compute_last_evaluation_date(self):
+        for course in self:
+            if course.evaluation_ids:
+                evaluations = course.evaluation_ids[-1]
+                course.last_evaluation_date = evaluations.date
+
+    @api.depends('student_ids')
+    def _compute_student_quantity(self):
+        self.student_quantity = len(self.student_ids)
